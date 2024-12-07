@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz per password</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #4e73df, #6f42c1);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      .quiz-container {
+        background: linear-gradient(to right, #4e73df, #6f42c1);
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        width: 350px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+
+      .question {
+        font-size: 16px;
+        margin-bottom: 15px;
+      }
+
+      input {
+        padding: 12px;
+        margin: 10px 0;
+        width: 100%;
+        border-radius: 10px;
+        border: 2px solid white;
+        background-color: transparent;
+        color: white;
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+      }
+
+      input:focus {
+        border-color: #16a34a;
+        outline: none;
+        transform: scale(1.05);
+      }
+
+      button {
+        padding: 12px;
+        background-color: #10b981;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+        transition: transform 0.2s, background-color 0.3s ease-in-out;
+      }
+
+      button:hover {
+        transform: scale(1.05);
+        background-color: #0f9f7b;
+      }
+
+      .result {
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .error {
+        color: red;
+      }
+
+      .success {
+        color: #16a34a;
+      }
+
+      .background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://www.w3schools.com/w3images/forest.jpg');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.1;
+        animation: moveBackground 20s linear infinite;
+        z-index: -1;
+      }
+
+      @keyframes moveBackground {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 100% 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-image"></div>
+    <div class="quiz-container">
+      <h2>Quiz per Password "dnlrmvbg.netlify.app"</h2>
+
+      <div id="question1">
+        <p class="question">1. Nome del creatore della pagina?</p>
+        <input type="text" id="answer1" placeholder="Rispondi qui" />
+      </div>
+
+      <div id="question2">
+        <p class="question">2. Data di nascita? (esempio 030123)</p>
+        <input type="text" id="answer2" placeholder="Rispondi qui" />
+      </div>
+
+      <div id="question3">
+        <p class="question">3. Segreto?</p>
+        <input type="text" id="answer3" placeholder="Rispondi qui" />
+      </div>
+
+      <div id="question4">
+        <p class="question">4. Interno di casa?</p>
+        <input type="text" id="answer4" placeholder="Rispondi qui" />
+      </div>
+
+      <div id="question5">
+        <p class="question">5. Nomignolo primo cane?</p>
+        <input type="text" id="answer5" placeholder="Rispondi qui" />
+      </div>
+
+      <button onclick="checkAnswers()">Verifica Risposte</button>
+
+      <div class="result" id="result"></div>
+    </div>
+
+    <script>
+      function checkAnswers() {
+        var answer1 = document
+          .getElementById('answer1')
+          .value.trim()
+          .toLowerCase();
+        var answer2 = document
+          .getElementById('answer2')
+          .value.trim()
+          .toLowerCase();
+        var answer3 = document
+          .getElementById('answer3')
+          .value.trim()
+          .toLowerCase();
+        var answer4 = document
+          .getElementById('answer4')
+          .value.trim()
+          .toLowerCase();
+        var answer5 = document
+          .getElementById('answer5')
+          .value.trim()
+          .toLowerCase();
+
+        var correctAnswers = {
+          answer1: 'daniele',
+          answer2: '240507',
+          answer3: 'fr',
+          answer4: '6',
+          answer5: ['biurling', 'tina', 'amiurling'],
+        };
+
+        var result = document.getElementById('result');
+
+        // Verifica se tutte le risposte sono corrette
+        if (
+          answer1 === correctAnswers.answer1 &&
+          answer2 === correctAnswers.answer2 &&
+          answer3 === correctAnswers.answer3 &&
+          answer4 === correctAnswers.answer4 &&
+          correctAnswers.answer5.includes(answer5)
+        ) {
+          result.textContent = 'Congratulazioni! La parola segreta è: dnl';
+          result.classList.remove('error');
+          result.classList.add('success');
+        } else {
+          result.textContent = 'Ops! Alcune risposte sono errate. Riprova!';
+          result.classList.add('error');
+          result.classList.remove('success');
+        }
+      }
+    </script>
+  </body>
+</html>
